@@ -1,4 +1,4 @@
-# (Skribbl.io)[skribb.io] Drawing Tool
+# [Skribbl.io](skribbl.io) Drawing Tool
 
 This is a tool I made intended for use on skribbl.io, but can probably be used with many drawing programs as well.
 
