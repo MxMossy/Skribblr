@@ -30,6 +30,6 @@ Once drawing mode is activated, place cursor at the corner of the area you inten
 Originally I intended to *enhance* my drawings on skribbl.io, but you can really use it in any program that does mouse drawing.
 
 Websites I've tested:
-- [excalidraw.com](excalidraw.com)
-- [skribbl.io](skribbl.io)
-- [sketchful.io](sketchful.io)
+- [excalidraw.com](https://excalidraw.com)
+- [skribbl.io](https://skribbl.io)
+- [sketchful.io](https://sketchful.io)
