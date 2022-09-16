@@ -225,7 +225,7 @@ class Skribblr(wx.Frame):
 
         # image displayer
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
-        self.dispImg = wx.StaticBitmap(self.panel, wx.ID_ANY, wx.Bitmap(wx.Image(100,100)))
+        self.dispImg = wx.StaticBitmap(self.panel, wx.ID_ANY, wx.Bitmap(wx.Image(900,650)))
         hbox3.Add(self.dispImg)
 
         vbox.Add(hbox3, flag=wx.LEFT | wx.TOP, border=10)
@@ -245,10 +245,13 @@ class Skribblr(wx.Frame):
 
     def processImgs(self):
         for imgName in os.listdir("./pics/")[1:]:
-            img = Image("./pics/" + imgName)
-            # check if image read properly
-            if not isinstance(img.img, type(None)):
-                self.imgs.append(img)
+            try:
+                img = Image("./pics/" + imgName)
+                if not isinstance(img.img, type(None)):
+                    self.imgs.append(img)
+            except AttributeError:
+                pass
+
 
     def downloadImgs(self, e):
         # TODO: switch to downloader module
@@ -262,7 +265,6 @@ class Skribblr(wx.Frame):
             os.system("del /q pics\*")
             execute = "py bbid.py -s \"" + query + "\" --limit " + limit + " -o " + output
             os.system(execute)
-            os.system("del /q pics\*.gif")
             print("done downloading")
             self.processImgs()
         else:
