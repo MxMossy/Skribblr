@@ -1,0 +1,6 @@
+numpy
+wxpython
+opencv-python
+pyautogui 
+pynput
+bing-image-downloader
