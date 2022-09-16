@@ -1,5 +1,5 @@
 ![](readme_pics/skribblr_header.png)
-Skribblr is a tool for converting images into sketches that can be drawn in any program that uses the mouse to draw. 
+Skribblr is a tool for converting images into sketches that can be drawn in any program that uses the mouse to draw. Use it to fake your drawing ability or to spice up your diagrams without disrupting the style. 
 
 **Warning: this tool moves your computers mouse directly. Use at your own risk.** 
 
