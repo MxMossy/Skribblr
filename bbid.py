@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Credit: https://github.com/ostrolucky/Bulk-Bing-Image-downloader
+
 import os, urllib.request, re, threading, posixpath, urllib.parse, argparse, socket, time, hashlib, pickle, signal, imghdr
 
 #config

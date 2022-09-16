@@ -1,3 +1,4 @@
 pics/*
+!pics/.gitkeep
 problem_pics/*
 env
