@@ -7,8 +7,9 @@ Skribblr is a tool for converting images into sketches that can be drawn in any 
 Python 3.8+
 
 ## Setup
-1. Run `pip install -r requirements.txt`
-2. Run `python skribblr.py`
+1. Clone this repo and `cd` into it.
+2. Run `pip install -r requirements.txt`
+3. Run `python skribblr.py`
 
 ## How to use
 After running the program, a GUI window will present itself. 
