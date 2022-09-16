@@ -25,7 +25,9 @@ After running the program, a GUI window will present itself.
 Once drawing mode is activated, place cursor at the corner of the area you intend to draw in. Then hold **left alt** and move your cursor to the other corner of the drawing area. Release alt to begin drawing. Hold Escape to abort the current initiated drawing.
 
 ### [Excalidraw](https://excalidraw.com/) Demo
-<video src="readme_content/skribblr_demo.mp4" width=800></video>
+
+https://user-images.githubusercontent.com/11238512/190692842-8b046b8d-292e-4985-9ed9-d8477c60a80c.mp4
+
 ![](readme_content/skribblr_demo_0.png)
 ![](readme_content/skribblr_demo_1.png)
 
