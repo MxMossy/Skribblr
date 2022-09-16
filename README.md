@@ -8,6 +8,7 @@ Python 3.8+
 
 ## Setup
 1. Run `pip install -r requirements.txt`
+2. Run `python skribblr.py`
 
 ## How to use
 After running the program, a GUI window will present itself. 
@@ -27,3 +28,8 @@ Once drawing mode is activated, place cursor at the corner of the area you inten
 
 ## Background
 Originally I intended to *enhance* my drawings on skribbl.io, but you can really use it in any program that does mouse drawing.
+
+Websites I've tested:
+- [excalidraw.com](excalidraw.com)
+- [skribbl.io](skribbl.io)
+- [sketchful.io](sketchful.io)
