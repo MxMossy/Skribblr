@@ -12,8 +12,10 @@ pyautogui.MINIMUM_DURATION = 0.01 # default: 0.1
 pyautogui.MINIMUM_SLEEP = 0.05 # default: 0.05
 pyautogui.PAUSE = 0.01 # default: 0.1
 
+IMG_DEFAULT_SIZE = (600, 600)
+
 class Image():
-    def __init__(self, img_path, size=(650,900)):
+    def __init__(self, img_path, size=IMG_DEFAULT_SIZE):
         self.img = self.resize(cv2.imread(img_path), size)
         self.optThreshVal = 0
         self.threshVal = 0
@@ -153,10 +155,12 @@ class Listener():
 
 class Skribblr(wx.Frame):
 
-    def __init__(self, parent, title):
+    def __init__(self, parent, title, size=(1300, 1600)):
         super(Skribblr, self).__init__(parent, title=title)
 
-        self.SetSize(2000, 1800)
+        self.SetSize(*size)
+        self.SetWindowStyle(wx.DEFAULT_FRAME_STYLE | wx.STAY_ON_TOP)
+        
         self.InitUI()
         self.Centre()
 
@@ -225,7 +229,7 @@ class Skribblr(wx.Frame):
 
         # image displayer
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
-        self.dispImg = wx.StaticBitmap(self.panel, wx.ID_ANY, wx.Bitmap(wx.Image(900,650)))
+        self.dispImg = wx.StaticBitmap(self.panel, wx.ID_ANY, wx.Bitmap(wx.Image(*IMG_DEFAULT_SIZE[::-1])))
         hbox3.Add(self.dispImg)
 
         vbox.Add(hbox3, flag=wx.LEFT | wx.TOP, border=10)
@@ -340,8 +344,9 @@ class Skribblr(wx.Frame):
                     break
 
             # cancel
-            if(listener.key_pressed and (listener.key == keyboard.Key.esc or
-                    listener.key == keyboard.Key.ctrl_l)):
+            # if(listener.key_pressed and (listener.key == keyboard.Key.esc or
+            #         listener.key == keyboard.Key.ctrl_l)):
+            if listener.key_pressed and listener.key == keyboard.Key.esc:
                 listener.stop()
                 print("Drawing Cancelled!")
                 time.sleep(0.5)
@@ -395,8 +400,9 @@ class Skribblr(wx.Frame):
                         cur_y = y
 
                     # emergency stop
-                    if(listener.key_pressed and (listener.key == keyboard.Key.esc or
-                            listener.key == keyboard.Key.ctrl_l)):
+                    # if(listener.key_pressed and (listener.key == keyboard.Key.esc or
+                    #         listener.key == keyboard.Key.ctrl_l)):
+                    if listener.key_pressed and listener.key == keyboard.Key.esc:
                         pyautogui.mouseUp()
                         print("\nDrawing Cancelled!")
                         listener.stop()
@@ -414,9 +420,6 @@ class Skribblr(wx.Frame):
         return
 
 if __name__ == "__main__":
-    # initialize
-    img_path = ""
-
     app = wx.App()
     win = Skribblr(None, title='Skribblr!')
     win.Show()
