@@ -8,8 +8,6 @@ import pyautogui
 from pynput import keyboard, mouse
 # from bing-image-downloader import downloader # TODO: implement new downloader
 
-import pdb
-
 pyautogui.MINIMUM_DURATION = 0.01 # default: 0.1
 pyautogui.MINIMUM_SLEEP = 0.05 # default: 0.05
 pyautogui.PAUSE = 0.01 # default: 0.1
@@ -169,7 +167,6 @@ class Skribblr(wx.Frame):
         self.threads = [] #TODO thread management
 
     def InitUI(self):
-
         self.panel = wx.Panel(self)
         font = wx.SystemSettings.GetFont(wx.SYS_SYSTEM_FONT)
         font.SetPointSize(9)
@@ -183,7 +180,6 @@ class Skribblr(wx.Frame):
         hbox0.Add(prefix, flag=wx.RIGHT, border=8)
         self.tc0 = wx.TextCtrl(self.panel, id=wx.ID_ANY, value="clipart")
         hbox0.Add(self.tc0, proportion=1)
-
         vbox.Add(hbox0, flag=wx.LEFT|wx.RIGHT|wx.TOP, border=10)
 
         vbox.Add((-1, 10))
@@ -199,8 +195,8 @@ class Skribblr(wx.Frame):
         imgBut = wx.Button(self.panel, label="Go", size=(70,30))
         imgBut.Bind(wx.EVT_BUTTON, self.downloadImgs)
         hbox1.Add(imgBut)
-        vbox.Add(hbox1, flag=wx.LEFT|wx.RIGHT|wx.TOP, border=10)
 
+        vbox.Add(hbox1, flag=wx.LEFT|wx.RIGHT|wx.TOP, border=10)
         vbox.Add((-1, 10))
 
         # image select
@@ -225,15 +221,14 @@ class Skribblr(wx.Frame):
         hbox2.Add(drawBut)
 
         vbox.Add(hbox2, flag=wx.LEFT | wx.TOP, border=10)
-
         vbox.Add((-1, 10))
 
         # image displayer
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
         self.dispImg = wx.StaticBitmap(self.panel, wx.ID_ANY, wx.Bitmap(wx.Image(100,100)))
         hbox3.Add(self.dispImg)
-        vbox.Add(hbox3, flag=wx.LEFT | wx.TOP, border=10)
 
+        vbox.Add(hbox3, flag=wx.LEFT | wx.TOP, border=10)
         vbox.Add((-1, 10))
 
         # slider
@@ -243,18 +238,20 @@ class Skribblr(wx.Frame):
 
         self.sld.Bind(wx.EVT_SCROLL_CHANGED, self.sliderChange)
         hbox4.Add(self.sld, flag=wx.ALL|wx.EXPAND, border=25)
+
         vbox.Add(hbox4, flag=wx.ALIGN_CENTRE|wx.CENTRE, border=10)
 
         self.panel.SetSizer(vbox)
 
     def processImgs(self):
-        for imgName in os.listdir("./pics/"):
+        for imgName in os.listdir("./pics/")[1:]:
             img = Image("./pics/" + imgName)
             # check if image read properly
             if not isinstance(img.img, type(None)):
                 self.imgs.append(img)
 
     def downloadImgs(self, e):
+        # TODO: switch to downloader module
         self.imgs = []
         self.tc2.SetValue("1")
         query = self.tc0.GetLineText(0) + " " + self.tc1.GetLineText(0)
@@ -263,7 +260,6 @@ class Skribblr(wx.Frame):
 
         if query != "":
             os.system("del /q pics\*")
-            # os.system("ls")
             execute = "py bbid.py -s \"" + query + "\" --limit " + limit + " -o " + output
             os.system(execute)
             os.system("del /q pics\*.gif")
@@ -279,7 +275,7 @@ class Skribblr(wx.Frame):
             return
 
         # display contours to be drawn
-        # TODO - fix 
+        # TODO - fix color warning issue for some images 
         image = wx.Image(self.imgs[select].contImg.shape[1], self.imgs[select].contImg.shape[0])
         image.SetData(cv2.cvtColor(self.imgs[select].contImg, cv2.COLOR_BGR2RGB).tobytes())
         self.dispImg.SetBitmap(image.ConvertToBitmap())
@@ -323,6 +319,7 @@ class Skribblr(wx.Frame):
         draw_thread.start()
 
     def draw(self, img, fast=True):
+        # TODO: consider refactoring this
         print("Awaiting start... (hold left alt and click-drag a box around the drawing area)")
         listener = Listener()
         areaStart, areaEnd, areaShape = (0,0), (0,0), (0,0)  
@@ -382,10 +379,10 @@ class Skribblr(wx.Frame):
 
                     if fast:
                         # skip points less than 5 away L1 norm on large contours
-                        # TODO: determine duration based on distance for consistent speed
+                        # TODO: adjust values or figure out moving with constant speed 
                         nextPointDist = abs(cur_x - x) + abs(cur_y - y)
                         if len(c) < 50 or nextPointDist > 5:
-                            dur = 0.7 if nextPointDist > 50 else 0
+                            dur = 0.3 if nextPointDist > 50 else 0
                             pyautogui.moveTo(x,y,dur) 
                             cur_x = x
                             cur_y = y
