@@ -8,8 +8,9 @@ Python 3.8+
 
 ## Setup
 1. Clone this repo and `cd` into it.
-2. Run `pip install -r requirements.txt`
-3. Run `python skribblr.py`
+2. (Optional) Set up a virtual env; run `python -m venv env`, then run `source env/Scripts/activate`
+3. Run `pip install -r requirements.txt`
+4. Run `python skribblr.py`
 
 ## How to use
 After running the program, a GUI window will present itself. 
