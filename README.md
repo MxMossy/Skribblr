@@ -1,4 +1,4 @@
-![](skribblr_header.png)
+![](readme_pics/skribblr_header.png)
 Skribblr is a tool for converting images into sketches that can be drawn in any program that uses the mouse to draw. 
 
 **Warning: this tool moves your computers mouse directly. Use at your own risk.** 
@@ -23,8 +23,8 @@ After running the program, a GUI window will present itself.
 Once drawing mode is activated, place cursor at the corner of the area you intend to draw in. Then hold **left alt** and move your cursor to the other corner of the drawing area. Release alt to begin drawing. Hold Escape to abort the current initiated drawing.
 
 ### [Excalidraw](https://excalidraw.com/) Demo
-![](skribblr_demo_0.png)
-![](skribblr_demo_1.png)
+![](readme_pics/skribblr_demo_0.png)
+![](readme_pics/skribblr_demo_1.png)
 
 ## Background
 Originally I intended to *enhance* my drawings on skribbl.io, but you can really use it in any program that does mouse drawing.
