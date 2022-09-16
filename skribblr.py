@@ -344,9 +344,8 @@ class Skribblr(wx.Frame):
                     break
 
             # cancel
-            # if(listener.key_pressed and (listener.key == keyboard.Key.esc or
-            #         listener.key == keyboard.Key.ctrl_l)):
-            if listener.key_pressed and listener.key == keyboard.Key.esc:
+            if(listener.key_pressed and (listener.key == keyboard.Key.esc or
+                    listener.key == keyboard.Key.ctrl_l)):
                 listener.stop()
                 print("Drawing Cancelled!")
                 time.sleep(0.5)
@@ -400,9 +399,8 @@ class Skribblr(wx.Frame):
                         cur_y = y
 
                     # emergency stop
-                    # if(listener.key_pressed and (listener.key == keyboard.Key.esc or
-                    #         listener.key == keyboard.Key.ctrl_l)):
-                    if listener.key_pressed and listener.key == keyboard.Key.esc:
+                    if(listener.key_pressed and (listener.key == keyboard.Key.esc or
+                            listener.key == keyboard.Key.ctrl_l)):
                         pyautogui.mouseUp()
                         print("\nDrawing Cancelled!")
                         listener.stop()
