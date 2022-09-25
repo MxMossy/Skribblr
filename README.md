@@ -32,7 +32,7 @@ https://user-images.githubusercontent.com/11238512/190692842-8b046b8d-292e-4985-
 ![](readme_content/skribblr_demo_1.png)
 
 ## Background
-Originally I made this to *enhance* my drawings on skribbl.io, but you can really use it in any program that does mouse drawing.
+Originally I made this to *enhance* my drawings on skribbl.io (hence the name), but you can really use it in any program that does mouse drawing.
 
 Websites I've tested:
 - [excalidraw.com](https://excalidraw.com)
