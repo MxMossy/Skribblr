@@ -158,17 +158,24 @@ class Skribblr(wx.Frame):
     def __init__(self, parent, title, size=(1300, 1600)):
         super(Skribblr, self).__init__(parent, title=title)
 
+
         self.SetSize(*size)
         self.SetWindowStyle(wx.DEFAULT_FRAME_STYLE | wx.STAY_ON_TOP)
         
         self.InitUI()
         self.Centre()
 
+        if not os.path.exists("./pics"):
+            os.makedirs("./pics")
+
         self.imgs = []
         self.processImgs()
         self.displayImg()
 
         self.threads = [] #TODO thread management
+
+        self.drawing = False;
+
 
     def InitUI(self):
         self.panel = wx.Panel(self)
@@ -220,9 +227,9 @@ class Skribblr(wx.Frame):
         rightBut.Bind(wx.EVT_BUTTON, self.nextImg)
         hbox2.Add(rightBut)
 
-        drawBut = wx.Button(self.panel, label="Start Draw!", size=(200,30))
-        drawBut.Bind(wx.EVT_BUTTON, self.startDraw)
-        hbox2.Add(drawBut)
+        self.drawBut = wx.Button(self.panel, label="Start Draw!", size=(200,30))
+        self.drawBut.Bind(wx.EVT_BUTTON, self.startDraw)
+        hbox2.Add(self.drawBut)
 
         vbox.Add(hbox2, flag=wx.LEFT | wx.TOP, border=10)
         vbox.Add((-1, 10))
@@ -266,7 +273,7 @@ class Skribblr(wx.Frame):
         output = "./pics"
 
         if query != "":
-            os.system("del /q pics\*")
+            os.system("del /q pics\\*")
             execute = "py bbid.py -s \"" + query + "\" --limit " + limit + " -o " + output
             os.system(execute)
             print("done downloading")
@@ -315,6 +322,8 @@ class Skribblr(wx.Frame):
         self.displayImg()
 
     def startDraw(self, e):
+        self.drawing = True;
+        self.drawBut.SetLabel("Primed...") # Press alt at corner of drawing Area and release at opposite corner
         select = int(self.tc2.GetLineText(0)) - 1
         if select not in range(len(self.imgs)):
             return
@@ -323,6 +332,10 @@ class Skribblr(wx.Frame):
         draw_thread = threading.Thread(target=self.draw, args=(self.imgs[select],), daemon=True)
 
         draw_thread.start()
+
+    def stopDraw(self):
+        self.drawing = False;
+        self.drawBut.SetLabel("Start Draw")
 
     def draw(self, img, fast=True):
         # TODO: consider refactoring this
@@ -404,6 +417,7 @@ class Skribblr(wx.Frame):
                         pyautogui.mouseUp()
                         print("\nDrawing Cancelled!")
                         listener.stop()
+                        self.stopDraw()
                         time.sleep(0.5)
                         return
 
@@ -415,6 +429,7 @@ class Skribblr(wx.Frame):
         listener.stop()
         print()
         print("Time Elapsed:", time.time()-start)
+        self.stopDraw()
         return
 
 if __name__ == "__main__":
