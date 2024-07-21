@@ -269,12 +269,12 @@ class Skribblr(wx.Frame):
         self.imgs = []
         self.tc2.SetValue("1")
         query = self.tc0.GetLineText(0) + " " + self.tc1.GetLineText(0)
-        limit = str(10)
+        limit = str(20)
         output = "./pics"
 
         if query != "":
             os.system("del /q pics\\*")
-            execute = "py bbid.py -s \"" + query + "\" --limit " + limit + " -o " + output
+            execute = "python bbid.py -s \"" + query + "\" --limit " + limit + " -o " + output
             os.system(execute)
             print("done downloading")
             self.processImgs()
