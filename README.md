@@ -7,6 +7,7 @@ Skribblr is a tool for converting images into sketches that can be drawn in any 
 Python 3.8+
 
 ## Setup (Windows)
+In the Git Bash terminal:
 1. Clone this repo and `cd` into it.
 2. (Optional) Set up a virtual env; run `python -m venv env`, then run `source env/Scripts/activate`
 3. Run `pip install -r requirements.txt`
